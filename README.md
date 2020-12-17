@@ -1,1 +1,1 @@
-# COVID_HELP_DESK-C-Project
+# COVID_HELP_DESK Project
