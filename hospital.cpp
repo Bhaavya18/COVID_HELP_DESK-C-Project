@@ -25,6 +25,15 @@ public:
         cout << "Patient district: " << district << endl;
         cout << endl;
     }
+     void displayofdonor()
+    {
+    	cout<<" Donor name:" <<name<<endl;
+    	cout<<" Donor age:" <<age<<endl;
+    	cout<<" Donor phoneno:" <<phoneno<<endl;
+    	cout<<" Donor district: "<<district <<endl;
+		cout<<" Donor plasma: "<<plasma <<endl;
+	}
+    
 };
 class patient : public Person{
 public:
@@ -362,6 +371,114 @@ Person DeleteRecord(string name)
     rename("temp.txt", "Covid Data.txt");
     return rv;
 }
+void searchbyplasma(string plasma)
+{
+	ifstream f;
+	f.open("Donor Data.txt");
+	int pf=0;
+	while(true)
+	{
+	 	 if(f.eof()!=0)
+	 	 {
+	 	 	if(pf==0)
+	 	 	{
+	 	 		cout<<"Donor of this blood group not available "<<endl;
+			  }
+			  break;
+		  }
+		   char str[100];
+        f.getline(str, 100);           
+        Person p;
+        int i = 0, check = 0;
+        while (str[i] != '\0')
+        {
+            if (str[i] == ' ')                 // riya   23   7685432198   gurugram 
+            {
+                check++;                     
+                i++;
+            }
+            if (check == 0)
+            {
+                p.name += str[i];
+            }
+            else if (check == 1)
+            {
+                p.age = p.age * 10 + (str[i] - '0');          //0*10+ 2-'0'=0+2=2           //2*10+(3-0)=23 
+            }
+            else if (check == 2)
+            {
+                p.phoneno = p.phoneno * 10 + (str[i] - '0');       // 
+            }
+            else if(check==3)
+            {
+                p.district += str[i];
+            }
+            else
+            {
+            	p.plasma+=str[i];
+			}
+            i++;
+        }
+        if (p.plasma == plasma)
+        {
+            pf++;
+            p.displayofdonor();
+        }
+    }
+    f.close();
+	}
+int SameDonor(string plasma)
+{
+    ifstream f;
+    f.open("Donor Data.txt");
+    int count = 0;
+    while (true)
+    {
+        if (f.eof() != 0)
+        {
+            break;
+        }
+        char str[100];
+        f.getline(str, 100);
+        Person p;
+        int i = 0, check = 0;
+        while (str[i] != '\0')
+        {
+            if (str[i] == ' ')
+            {
+                check++;
+                i++;
+            }
+            if (check == 0)
+            {
+                p.name += str[i];
+            }
+            else if (check == 1)
+            {
+                p.age = p.age * 10 + (str[i] - '0');
+            }
+            else if (check == 2)
+            {
+                p.phoneno = p.phoneno * 10 + (str[i] - '0');
+            }
+            else if(check==3)
+            {
+                p.district += str[i];
+            }
+            else
+            {
+            	p.plasma+=str[i];
+			}
+            i++;
+        }
+        if (p.plasma== plasma)
+        {
+            count++;
+        }
+    }
+    f.close();
+    return count;
+}
 void generatebill(int pid)
 {
     ifstream fp;
@@ -465,10 +582,13 @@ int main()
             cout << "6. Delete record of a patient" << endl;
             cout << "7. Check gudeleines for zone (by colour)" << endl;
             cout << "8. Number of empty beds available in the hospital right now" << endl;
-            cout << "9. District wise Zone distribution" << endl;
-            cout << "10. Maintain patient health record" << endl;
-            cout << "11. Generate Medical bill of the patient " << endl;
-            cout << "12. Exit" << endl;
+             cout <<"9. Enter the details of plasma donor" << endl;
+            cout<<"10. Search for plasma donor availiable "<<endl;
+            cout<<"11. Total no of donor available same blood group:"<<endl;
+            cout << "12. District wise Zone distribution" << endl;
+            cout << "13. Maintain patient health record" << endl;
+            cout << "14. Generate Medical bill of the patient " << endl;
+            cout << "15. Exit" << endl;
             cin >> x;
         }
         if (x == 1 || x == -1)
@@ -577,14 +697,58 @@ int main()
             cout << 350 - TotalPatients();
             cout << endl;
         }
-        else if (x == 9)
+        else if(x==9 || x==-3)
+        {
+        	 
+            Person p;
+            cout << "Enter donor name: ";
+            cin >> p.name;
+            cout << "Enter donor age: ";
+            cin >> p.age;
+            cout << "Enter donor phoneno: ";
+            cin >> p.phoneno;
+            cout << "Enter donor district: ";
+            cin >> p.district;
+            cout<<"Enter the donor blood group:";
+            cin>>p.plasma;
+            cout << "If entered wrong data and want to re-enter input -1 else input 0: ";
+            cin >> x;
+            cout << endl;
+            cout << endl;
+            if (x == -3)
+            {
+                continue;
+            }
+            fstream fp;
+            fp.open("Donor Data.txt", ios_base::app);
+            fp << p.name << " " << p.age << " " << p.phoneno << " " << p.district <<" "<<p.plasma<<endl;
+            fp.close();
+        }
+        else if(x==10)
+
+      {   cout<<" Enter the blood group:";
+            string plasma;
+            cin>>plasma;
+            searchbyplasma(plasma);
+	
+		}
+		else if(x==11)
+		{
+			 cout << "Enter Blood group to be search: ";
+            string plasma;
+            cin >> plasma;
+            cout << "Total no of donor of blood group " << plasma <<" is"<< ": " << SameDonor(plasma) << endl;
+            cout << endl;
+				}		
+        
+        else if (x == 12)
         {
             cout << "Enter district whose zone you want to know: ";
             string district;
             cin >> district;
             zone_distribution(district);
         }
-        else if (x == 10 || x==-2)
+        else if (x == 13 || x==-2)
         {
             patient p;
             cout << "Enter patient id ";
@@ -612,17 +776,17 @@ int main()
             fp << p.pid << " " << p.name << " " << p.days << " " << p.intensiveCareNeeded << " " << p.rt_pcr << " " << p.hasMedicalInsurance << endl;
             fp.close();
         }
-        else if(x==11){
+        else if(x==14){
             int pid;
             cout<<"Enter patient id whose bill has to be generated "<<endl;
             cin>>pid;
             generatebill(pid);
         }
-        else if (x == 12)
+        else if (x == 15)
         {
             break;
         }
-        else if (x == 13)
+        else if (x >15)
         {
             cout << "Wrong Input" << endl;
         }
