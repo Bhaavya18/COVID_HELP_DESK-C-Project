@@ -10,6 +10,7 @@ public:
     int age;
     long long phoneno;
     string district;
+	string plasma;
     Person()
     {
         name = "";
@@ -711,7 +712,7 @@ int main()
             cin >> p.district;
             cout<<"Enter the donor blood group:";
             cin>>p.plasma;
-            cout << "If entered wrong data and want to re-enter input -1 else input 0: ";
+            cout << "If entered wrong data and want to re-enter input -3 else input 0: ";
             cin >> x;
             cout << endl;
             cout << endl;
