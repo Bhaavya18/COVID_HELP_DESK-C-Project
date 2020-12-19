@@ -10,11 +10,7 @@ public:
     int age;
     long long phoneno;
     string district;
-<<<<<<< HEAD
 	string plasma;
-=======
-    string plasma;
->>>>>>> 46bdad7250602e9ce62864f82853d6607b65f8de
     Person()
     {
         name = "";
@@ -588,11 +584,7 @@ int main()
             cout << "7. Check guideleines for zone (by colour)" << endl;
             cout << "8. Number of empty beds available in the hospital right now" << endl;
              cout <<"9. Enter the details of plasma donor" << endl;
-<<<<<<< HEAD
             cout<<"10. Search for plasma donor available "<<endl;
-=======
-            cout<<"10. Search for plasma donor availiable "<<endl;
->>>>>>> 46bdad7250602e9ce62864f82853d6607b65f8de
             cout<<"11. Total no of donor available same blood group:"<<endl;
             cout << "12. District wise Zone distribution" << endl;
             cout << "13. Maintain patient health record" << endl;
