@@ -10,7 +10,7 @@ public:
     int age;
     long long phoneno;
     string district;
-	string plasma;
+    string plasma;
     Person()
     {
         name = "";
@@ -667,7 +667,7 @@ int main()
         else if (x == 7)
         {
             int zone;
-            cout << "Guidlines for zones";
+            cout << "Guidelines for zones";
             cout << "\nEnter the the colour of zone";
             cout << "\n1. Green \n2. Orange \n3. Red\n";
             cin >> zone;
