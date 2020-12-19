@@ -581,10 +581,10 @@ int main()
             cout << "4. No. of patients in specified district" << endl;
             cout << "5. Display all patients in alphabetical order" << endl;
             cout << "6. Delete record of a patient" << endl;
-            cout << "7. Check gudeleines for zone (by colour)" << endl;
+            cout << "7. Check guideleines for zone (by colour)" << endl;
             cout << "8. Number of empty beds available in the hospital right now" << endl;
              cout <<"9. Enter the details of plasma donor" << endl;
-            cout<<"10. Search for plasma donor availiable "<<endl;
+            cout<<"10. Search for plasma donor available "<<endl;
             cout<<"11. Total no of donor available same blood group:"<<endl;
             cout << "12. District wise Zone distribution" << endl;
             cout << "13. Maintain patient health record" << endl;
@@ -667,7 +667,7 @@ int main()
         else if (x == 7)
         {
             int zone;
-            cout << "Guidlines for zones";
+            cout << "Guidelines for zones";
             cout << "\nEnter the the colour of zone";
             cout << "\n1. Green \n2. Orange \n3. Red\n";
             cin >> zone;
